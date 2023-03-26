@@ -18,6 +18,10 @@ export const verifyLoginMiddleware = async (req: any, resp: Response, next: Next
         if(error){
             throw new AppError(error.message, 404)
         }
+        
+        req.loggedUser = {
+            id: decoded.sub,
+        }
 
     })
     return next()

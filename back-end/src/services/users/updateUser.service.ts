@@ -11,8 +11,7 @@ export const updateUserService = async (userData: IUserUpdate, userId: string) =
     const userToBeUpdated = await usersRepository.findOne({
         where: {
             id: userId
-        },
-        withDeleted: true
+        }
     })
 
     if(!userToBeUpdated){
