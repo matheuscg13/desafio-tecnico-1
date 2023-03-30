@@ -1,5 +1,6 @@
 import { hashSync } from "bcryptjs";
 import {BeforeInsert, BeforeUpdate, Column, CreateDateColumn,Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import { Contacts } from "./contact.entity";
 
 @Entity("users")
 class Users {
@@ -20,6 +21,9 @@ class Users {
 
     @Column()
     password: string
+
+    @OneToMany(() => Contacts, (contacts) => contacts.user)
+    listContacts: Contacts[]
 
     @BeforeUpdate()
     @BeforeInsert()

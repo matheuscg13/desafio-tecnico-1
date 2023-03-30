@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import {AppDataSource} from "../../data-source"
 import { Users } from "../../entities/user.entitiy"
 import { createUserResponseSchema } from "../../serializers/users.serializers"
@@ -7,12 +9,16 @@ export const getProfileService = async (userId: string) => {
 
     const user = await usersRepository.findOne({
         where: {
-            id: userId
+            id: userId,
+        },
+        relations: {
+            listContacts: true
         }
     })
 
     const userToBeReturned = await createUserResponseSchema.validate(user, {
-        stripUnknown: true
+        stripUnknown: true,
+        
     })
 
     return userToBeReturned

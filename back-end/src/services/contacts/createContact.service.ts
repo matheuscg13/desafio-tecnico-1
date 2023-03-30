@@ -4,12 +4,12 @@ import { Contacts } from "../../entities/contact.entity";
 import { Users } from "../../entities/user.entitiy";
 import { iContact } from "../../interfaces/contacts.interfaces";
 
-export const createContactService = async (contactData: iContact) => {
+export const createContactService = async (contactData: iContact, userId: string) => {
     const contactsRepository = AppDataSource.getRepository(Contacts)
     const usersRepository = AppDataSource.getRepository(Users)
     
     const user = await usersRepository.findOneBy({
-        id: contactData.userId
+        id: userId
     })
 
 
